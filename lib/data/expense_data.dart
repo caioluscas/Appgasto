@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:app_gestao_de_custos/datetime/date_time_helper.dart';
+import 'package:flutter/material.dart';
 
 import '../models/expense_item.dart';
 
-class ExpenseData{
+class ExpenseData extends ChangeNotifier{
   //list all expenses
   List<ExpenseItem> overallExpenseList = [];
 
@@ -15,11 +16,15 @@ class ExpenseData{
 
   //add new expense
   void addNewExpense(ExpenseItem expense){
-    overallExpenseList.remove(expense);
+    overallExpenseList.add(expense);
+
+    notifyListeners();
   }
   //delete expense
   void deleteExpense(ExpenseItem expense){
     overallExpenseList.remove(expense);
+
+    notifyListeners();
   }
 
   //get weekday from a DateTime object
